@@ -1,0 +1,31 @@
+name: Refresh stats
+
+on:
+  schedule:
+    - cron: "17 21 * * *"   # daily, 02:47 IST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install fonttools brotli
+      - run: python scripts/fetch_stats.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_LOGIN: ${{ github.repository_owner }}
+      - run: python scripts/build.py stats
+      - name: Commit if changed (signed by GitHub, shows as Verified)
+        run: |
+          FILES="data/stats.json assets/stats.svg assets/m/stats.svg"
+          if git diff --quiet -- $FILES; then echo "no changes"; exit 0; fi
+          python scripts/commit_signed.py $FILES
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
