@@ -64,7 +64,12 @@ def nav(active):
     b.append(f'<rect x="166" y="20" width="{nw}" height="54" fill="{INK}"/>')
     b.append(T(180, 58, active, "pix", 22, PAPER2))
     sub = NAV_SUB[active]
-    b.append(T(MW - 30, 56, sub, "mono", 19, MUTED, anchor="end"))
+    room = MW - 30 - (166 + nw + 16)            # space left of the active label
+    ss = 19
+    while width(sub, "mono", ss) > room and ss > 14:
+        ss -= 1
+    if width(sub, "mono", ss) <= room:
+        b.append(T(MW - 30, 56, sub, "mono", ss, MUTED, anchor="end"))
     return svg(MW, H, "".join(b), ["pix", "mono"], "", f"Section {idx}: {active} - {sub}")
 
 
@@ -166,11 +171,10 @@ def stack():
                "Tech stack: " + ", ".join(i[1] for i in items))
 
 
-def card(c):
+def _card_body(c, W=300, x0=22):
+    """Tag, name, short line and stack chips of a phone card. Returns (parts, y where content ends)."""
     slug, wtitle, tag, tagc, name, desc, flow, stack = c
-    W, H = 300, 500
-    b = [window(3, 3, W - 12, H - 12, wtitle, shadow=6, bar=30)]
-    x0 = 22
+    b = []
     tagtext = PAPER2 if tagc in (ORANGE, RUST, TEAL) else INK
     tw = width(tag, "pix", 14) + 20
     b.append(f'<rect x="{x0}" y="56" width="{tw}" height="32" fill="{tagc}" stroke="{INK}" stroke-width="2"/>')
@@ -181,6 +185,29 @@ def card(c):
     y += 8
     for ln in wrap(SHORT[slug], "body", 22, W - 46):
         b.append(T(x0, y, ln, "body", 22, MUTED)); y += 27
+    y += 6
+    cx = x0
+    for t in stack:                                 # the stack as small chips, wrapping inside the card
+        cw = width(t, "mono", 15) + 16
+        if cx + cw > W - 24 and cx > x0:
+            cx = x0; y += 36
+        b.append(f'<rect x="{cx}" y="{y}" width="{cw:.1f}" height="28" fill="none" stroke="{INK}" stroke-width="2"/>')
+        b.append(T(cx + 8, y + 19, t, "mono", 15, INK))
+        cx += cw + 6
+    return b, y + 28
+
+
+def card_height():
+    """One height for every phone card (tallest content + proof strip), so side-by-side cards line up."""
+    return int(max(_card_body(c)[1] for c in CARDS) + 34 + 120)
+
+
+def card(c):
+    slug, wtitle, tag, tagc, name, desc, flow, stack = c
+    W, H = 300, card_height()
+    b = [window(3, 3, W - 12, H - 12, wtitle, shadow=6, bar=30)]
+    x0 = 22
+    b += _card_body(c, W, x0)[0]
     b.append(f'<rect x="4.5" y="{H-120}" width="{W-15}" height="111.5" fill="{INK}"/>')
     b.append(T(x0, H - 90, "PROOF", "pix", 13, MUSTARD))
     for j, ln in enumerate(wrap(PROOF[slug], "mono", 17, W - 46)[:3]):
@@ -311,21 +338,29 @@ def stats():
     start = dt.date.fromisoformat(cal[-1][0]) - dt.timedelta(days=weeks * 7 - 1)
     start -= dt.timedelta(days=(start.weekday() + 1) % 7)
     cmap = dict(cal)
-    hx, hy, cs, gp = x0, 470, 17.5, 3.4
-    b.append(T(x0, hy - 46, "LAST 6 MONTHS", "pix", 15, INK))
-    lastm = None
-    day = start; i = 0
     end = dt.date.fromisoformat(cal[-1][0])
+    ncols = (end - start).days // 7 + 1          # the range can span 27 week columns, not 26
+    step = (MW - 14 - x0 - 30) / ncols           # fit the grid inside the window
+    cs = round(step * 0.84, 1); gp = step - cs
+    hx, hy = x0, 470
+    b.append(T(x0, hy - 46, "LAST 6 MONTHS", "pix", 15, INK))
+    lastm = None; labels = []
+    day = start; i = 0
     while day <= end:
         wk, dw = divmod(i, 7)
         c = cmap.get(day.isoformat(), 0)
         lv = 0 if c == 0 else 1 if c <= 2 else 2 if c <= 5 else 3 if c <= 9 else 4
-        x = hx + wk * (cs + gp); y = hy + dw * (cs + gp)
+        x = hx + wk * step; y = hy + dw * step
         b.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{cs}" height="{cs}" fill="{HEAT[lv]}"' + (f' stroke="{INK}" stroke-width="1.5"' if c else "") + "/>")
         if day.month != lastm and dw == 0:
-            b.append(T(x, hy - 12, day.strftime("%b").lower(), "mono", 16, MUTED)); lastm = day.month
+            labels.append((wk, x, day.strftime("%b").lower())); lastm = day.month
         day += dt.timedelta(1); i += 1
-    hw = weeks * (cs + gp)
+    for k, (wk, x, nm) in enumerate(labels):    # drop a month label that would collide with the next one
+        if k + 1 < len(labels) and labels[k + 1][0] - wk < 3:
+            continue
+        b.append(T(x, hy - 12, nm, "mono", 16, MUTED))
+    hw = (ncols - 1) * step
+    weeks = ncols - 1
     css += f".scan{{animation:scan 7s steps({weeks}) infinite}}@keyframes scan{{from{{transform:translateX(0)}}to{{transform:translateX({hw:.1f}px)}}}}"
     b.append(f'<rect class="scan" x="{hx-3}" y="{hy-4}" width="{cs+6}" height="{7*(cs+gp)+4}" fill="none" stroke="{ORANGE}" stroke-width="3"/>')
     ly = hy + 7 * (cs + gp) + 80
