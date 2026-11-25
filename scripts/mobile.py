@@ -220,7 +220,7 @@ ACH = [("trophy", ORANGE, "PATENT FILED", "Driver drowsiness & faint detection")
        ("chip", TEAL, "4 AI SYSTEMS SHIPPED", "First AI integrations at Dhee Coding Lab"),
        ("star", MUSTARD, "CGPA 9.7 / 10", "B.Tech AI & ML, Jain University"),
        ("flag", RUST, "BUILDATHON 2026", "Razorpay AI Buildathon, Track 03"),
-       ("scroll", TEAL, "TEAM LEAD", "FET Aavishkar 2026, Team Omnitrons"),
+       ("scroll", TEAL, "RUNNER-UP", "FET Aavishkar 2026, team lead"),
        ("heart", ORANGE, "DICE 0.93", "Cardiac segmentation, SE-ResUNet")]
 
 def achievements():

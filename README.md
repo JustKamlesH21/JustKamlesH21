@@ -17,23 +17,23 @@
 <picture><source media="(max-width: 767px)" srcset="./assets/m/nav-projects.svg"><img src="./assets/nav-projects.svg" alt="03 Projects" width="100%"></picture>
 
 <p align="center">
+  <a href="https://github.com/JustKamlesH21/pratyaksh"><picture><source media="(max-width: 767px)" srcset="./assets/m/card-pratyaksh.svg"><img src="./assets/card-pratyaksh.svg" alt="Pratyaksh: runner-up at FET Aavishkar 2026, tells a live caller apart from an AI voice clone" width="49%"></picture></a>
   <a href="https://github.com/JustKamlesH21/Salvage_Agent"><picture><source media="(max-width: 767px)" srcset="./assets/m/card-salvage.svg"><img src="./assets/card-salvage.svg" alt="Salvage Agent" width="49%"></picture></a>
+</p>
+<p align="center">
   <a href="https://github.com/JustKamlesH21/driver-drowsiness-faint-detection"><picture><source media="(max-width: 767px)" srcset="./assets/m/card-drowsiness.svg"><img src="./assets/card-drowsiness.svg" alt="Driver Drowsiness & Faint Detection" width="49%"></picture></a>
-</p>
-<p align="center">
   <a href="https://github.com/JustKamlesH21/Hybrid_CNN_Sysmon_using_CTI"><picture><source media="(max-width: 767px)" srcset="./assets/m/card-sysmon.svg"><img src="./assets/card-sysmon.svg" alt="Hybrid CNN-Transformer for Sysmon" width="49%"></picture></a>
-  <a href="https://github.com/JustKamlesH21/Insurance_Agent"><picture><source media="(max-width: 767px)" srcset="./assets/m/card-fnol.svg"><img src="./assets/card-fnol.svg" alt="FNOL Claims Agent" width="49%"></picture></a>
 </p>
 <p align="center">
-  <a href="https://github.com/JustKamlesH21/template-detector"><picture><source media="(max-width: 767px)" srcset="./assets/m/card-template.svg"><img src="./assets/card-template.svg" alt="Outdated Template Detector" width="49%"></picture></a>
-  <a href="https://github.com/JustKamlesH21/oracle-vm-grabber"><picture><source media="(max-width: 767px)" srcset="./assets/m/card-oracle.svg"><img src="./assets/card-oracle.svg" alt="Oracle VM Grabber" width="49%"></picture></a>
+  <a href="https://github.com/JustKamlesH21/research_agent"><picture><source media="(max-width: 767px)" srcset="./assets/m/card-research.svg"><img src="./assets/card-research.svg" alt="Research Agent" width="49%"></picture></a>
+  <a href="https://github.com/JustKamlesH21/shield-reproduction"><picture><source media="(max-width: 767px)" srcset="./assets/m/card-shield.svg"><img src="./assets/card-shield.svg" alt="Reproducing SHIELD" width="49%"></picture></a>
 </p>
 
 <picture><source media="(max-width: 767px)" srcset="./assets/m/internship.svg"><img src="./assets/internship.svg" alt="Internship at Dhee Coding Lab: Text-to-SQL RAG, student-JD matching, AI resume builder, interview Q&A platform" width="100%"></picture>
 
 <picture><source media="(max-width: 767px)" srcset="./assets/m/nav-log.svg"><img src="./assets/nav-log.svg" alt="04 Log" width="100%"></picture>
 
-<picture><source media="(max-width: 767px)" srcset="./assets/m/achievements.svg"><img src="./assets/achievements.svg" alt="Achievements: patent filed, IIT Hyderabad (TiHAN), CGPA 9.7, Razorpay AI Buildathon 2026, FET Aavishkar team lead, Dice 0.93 cardiac model" width="100%"></picture>
+<picture><source media="(max-width: 767px)" srcset="./assets/m/achievements.svg"><img src="./assets/achievements.svg" alt="Achievements: patent filed, IIT Hyderabad (TiHAN), CGPA 9.7, Razorpay AI Buildathon 2026, FET Aavishkar 2026 runner-up (team lead), Dice 0.93 cardiac model" width="100%"></picture>
 
 <picture><source media="(max-width: 767px)" srcset="./assets/m/research.svg"><img src="./assets/research.svg" alt="Research: VLP-FusionNet cardiac risk prediction paper in progress. Certifications: IIT Hyderabad (TiHAN), Google Cloud, Meta, Oracle, Wolfram Research, University of Illinois, HackerRank" width="100%"></picture>
 

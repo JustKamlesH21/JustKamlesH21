@@ -658,6 +658,9 @@ def menubar(active):
 
 # ---------------------------------------------------------------- project cards
 CARDS = [
+    ("pratyaksh", "pratyaksh.app", "RUNNER-UP", MUSTARD, "Pratyaksh",
+     "Tells a bank whether a caller is a live person holding the customer's phone or an AI voice clone. No voice is stored.",
+     ["caller", "voice agent", "signals", "verdict"], ["FastAPI", "LiveKit", "faster-whisper", "React"]),
     ("salvage", "salvage_agent", "BUILDATHON", ORANGE, "Salvage Agent",
      "Payment-recovery agent. The LLM diagnoses failed charges; hard RBI gates decide what actually runs.",
      ["webhook", "LLM diagnose", "RBI gates", "recover"], ["Python", "FastAPI", "React", "TypeScript", "MongoDB"]),
@@ -666,33 +669,30 @@ CARDS = [
      ["webcam", "face mesh", "EAR + pose", "alert"], ["Python", "MediaPipe"]),
     ("sysmon", "sysmon_hybrid", "CYBERSECURITY", TEAL, "Hybrid CNN-Transformer",
      "Threat detection on Windows Sysmon logs: CNNs read local patterns, Transformers read the global context.",
-     ["sysmon logs", "CNN", "transformer", "verdict"], ["Python", "PyTorch"]),
-    ("fnol", "fnol_agent", "INSURTECH", MUSTARD, "FNOL Claims Agent",
-     "Reads claim documents with an LLM, routes them with auditable rules, and falls back to regex if the model is down.",
-     ["claim doc", "LLM extract", "rules", "route"], ["Python", "Ollama", "Pydantic", "Streamlit"]),
-    ("template", "template_check", "COMPLIANCE", TEAL, "Outdated Template Detector",
-     "Flags Word and PDF documents built on a superseded QMS template before they reach review. 14 tests.",
-     ["document", "footer regex", "master list", "verdict"], ["Python", "pdfplumber", "Streamlit"]),
-    ("oracle", "vm_grabber.sh", "DEVOPS", ORANGE, "Oracle VM Grabber",
-     "Keeps retrying Oracle Cloud Always Free Ampere VM launches until capacity frees up, so you don't have to.",
-     ["launch", "no capacity", "retry", "VM up"], ["Shell"]),
+     ["sysmon logs", "CNN", "transformer", "verdict"], ["Python", "PyTorch", "scikit-learn"]),
+    ("research", "research_agent", "MULTI-AGENT", TEAL, "Research Agent",
+     "Ask a research question, get a short literature review that cites real arXiv, OpenAlex and Semantic Scholar papers.",
+     ["question", "search", "you approve", "review"], ["OpenAI SDK", "Streamlit", "Chroma"]),
+    ("shield", "shield_repro", "RESEARCH", ORANGE, "Reproducing SHIELD",
+     "Runs a published APT-detection paper's released code end to end on DARPA TC E3 and checks whether its results hold.",
+     ["audit logs", "graph", "LLM check", "score"], ["Python", "Qwen2.5", "Nemotron"]),
 ]
 
 PROOF = {
+    "pratyaksh": "2nd place · FET Aavishkar 2026 · Team Omnitrons",
     "salvage": "11 RBI gates · 115 taxonomy rules · 10 bounded actions",
     "drowsiness": "3 alert levels · alarm + Twilio SMS emergency alert",
-    "sysmon": "synthetic logic-trap data · saliency maps · Docker",
-    "fnol": "11 test cases passing · Excel audit trail per claim",
-    "template": "4 verdict types · 14 test cases · no AI in the decision",
-    "oracle": "set-and-forget retry loop · runs unattended",
+    "sysmon": "99% held-out accuracy · 83 of 84 attacks caught",
+    "research": "6 agents · human approval step · tests pass",
+    "shield": "CADETS window F1 0.70 vs 0.39 in the paper",
 }
 SHORT = {
+    "pratyaksh": "Tells a live caller apart from an AI voice clone.",
     "salvage": "Payment-recovery agent. The LLM diagnoses; rules move the money.",
     "drowsiness": "Webcam system that catches a drowsy or fainting driver.",
     "sysmon": "Deep learning that spots attacks in Windows Sysmon logs.",
-    "fnol": "Reads insurance claims with an LLM, routes them by rules.",
-    "template": "Flags documents built on an outdated QMS template.",
-    "oracle": "Retries Oracle Cloud free VM launches until one lands.",
+    "research": "Turns a question into a cited literature review.",
+    "shield": "Checks whether a published APT-detection result holds up.",
 }
 
 def card(c):
@@ -790,7 +790,7 @@ def achievements():
              ("chip", TEAL, "4 AI SYSTEMS SHIPPED", "The first AI integrations at Dhee Coding Lab"),
              ("star", MUSTARD, "CGPA 9.7 / 10", "B.Tech AI & ML, Jain University"),
              ("flag", RUST, "BUILDATHON 2026", "Razorpay AI Buildathon, Track 03"),
-             ("scroll", TEAL, "TEAM LEAD", "FET Aavishkar 2026, Team Omnitrons"),
+             ("scroll", TEAL, "RUNNER-UP", "FET Aavishkar 2026, team lead"),
              ("heart", ORANGE, "DICE 0.93", "Cardiac segmentation, SE-ResUNet")]
     W, H = 1280, 470
     css = (".pop{animation:pop 6s steps(1) infinite}@keyframes pop{0%,92%{opacity:1}94%{opacity:0}96%{opacity:1}}"
@@ -813,7 +813,7 @@ def achievements():
         for j, ln in enumerate(wrap(sub, "body", 17, tw - 40)):
             b.append(T(x + 20, y + 152 + j * 22, ln, "body", 17, MUTED))
     return svg(W, H, "".join(b), ["pix", "head", "body"], css,
-               "Achievements: patent filed, IIT Hyderabad TiHAN program, CGPA 9.7, Razorpay Buildathon 2026, FET Aavishkar team lead, Dice 0.93 cardiac model")
+               "Achievements: patent filed, IIT Hyderabad TiHAN program, CGPA 9.7, Razorpay Buildathon 2026, FET Aavishkar 2026 runner-up (team lead), Dice 0.93 cardiac model")
 
 
 # ---------------------------------------------------------------- footer
