@@ -459,7 +459,7 @@ def stats(path=None):
     def lvl(c):
         return 0 if c == 0 else 1 if c <= 2 else 2 if c <= 5 else 3 if c <= 9 else 4
     weeks = (len(cal) + off + 6) // 7
-    lastm = None
+    lastm = None; labels = []
     for i, (ds, c) in enumerate(cal):
         k = i + off; wk, dw = divmod(k, 7)
         x = hx + wk * (cs + gp); y = hy + dw * (cs + gp)
@@ -467,8 +467,12 @@ def stats(path=None):
                  + (f' stroke="{INK}" stroke-width="1.5"' if c else "") + "/>")
         m = ds[5:7]
         if m != lastm and dw <= 1 and wk < weeks - 2:
-            b.append(T(x, hy - 10, _dt.date.fromisoformat(ds).strftime("%b").lower(), "mono", 12, MUTED))
+            labels.append((wk, x, _dt.date.fromisoformat(ds).strftime("%b").lower()))
             lastm = m
+    for j, (wk, x, nm) in enumerate(labels):   # a month that starts the grid with a sliver yields to the next label
+        if j + 1 < len(labels) and labels[j + 1][0] - wk < 3:
+            continue
+        b.append(T(x, hy - 10, nm, "mono", 12, MUTED))
     hw = weeks * (cs + gp)
     css.append(f".scan{{animation:scan 9s steps({weeks}) infinite}}@keyframes scan{{from{{transform:translateX(0)}}to{{transform:translateX({hw:.1f}px)}}}}")
     b.append(f'<rect class="scan" x="{hx-2.5}" y="{hy-3.5}" width="{cs+5}" height="{7*(cs+gp)+3}" fill="none" stroke="{ORANGE}" stroke-width="2.5"/>')
