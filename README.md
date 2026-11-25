@@ -39,6 +39,6 @@
 
 <picture><source media="(max-width: 767px)" srcset="./assets/m/nav-stats.png"><img src="./assets/nav-stats.svg" alt="05 Stats" width="100%"></picture>
 
-<picture><source media="(max-width: 767px)" srcset="./assets/m/stats.svg"><img src="./assets/stats.svg" alt="GitHub stats, refreshed daily" width="100%"></picture>
+<picture><source media="(max-width: 767px)" srcset="./assets/m/stats.png"><img src="./assets/stats.svg" alt="GitHub stats, refreshed daily" width="100%"></picture>
 
 <a href="https://www.linkedin.com/in/kamlesh-choudhary21/"><picture><source media="(max-width: 767px)" srcset="./assets/m/footer.png"><img src="./assets/footer.svg" alt="Let's build something that holds up in production. Press start to connect." width="100%"></picture></a>

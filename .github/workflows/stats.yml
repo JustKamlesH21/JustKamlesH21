@@ -16,15 +16,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install fonttools brotli
+      - run: pip install fonttools brotli playwright==1.49.1
+      - run: python -m playwright install --with-deps chromium
       - run: python scripts/fetch_stats.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_LOGIN: ${{ github.repository_owner }}
       - run: python scripts/build.py stats
+      - run: python scripts/render_png.py assets/m/stats.svg   # phones get a PNG; the GitHub app breaks on some SVGs
       - name: Commit if changed (signed by GitHub, shows as Verified)
         run: |
-          FILES="data/stats.json assets/stats.svg assets/m/stats.svg"
+          FILES="data/stats.json assets/stats.svg assets/m/stats.svg assets/m/stats.png"
           if git diff --quiet -- $FILES; then echo "no changes"; exit 0; fi
           python scripts/commit_signed.py $FILES
         env:
