@@ -118,7 +118,7 @@ def stack():
             items.append((slug, name, desc, x0 + j * (TS + GAP), y))
         y += TS + 46
     cap_y = y - 10
-    H = cap_y + 150 + 120
+    H = cap_y + 180 + 120
     N = len(items); D = 1.6; TT = N * D
     css = [PANDA_CSS, BLINK,
            ".legA{animation:legA .5s steps(1) infinite}.legB{animation:legB .5s steps(1) infinite}"
@@ -149,7 +149,7 @@ def stack():
         b.append(f'<g class="lift{k}"><rect x="{x}" y="{y}" width="{TS}" height="{TS}" fill="{PAPER2}" stroke="{INK}" stroke-width="2.5"/>'
                  + logo(slug, x + TS / 2, y + 40, 44) + T(x + TS / 2, y + 88, name, "mono", 14, INK, anchor="middle") + "</g>")
     b.append(f'<g class="sel"><rect x="0" y="0" width="{TS+14}" height="{TS+14}" fill="none" stroke="{ORANGE}" stroke-width="4" stroke-dasharray="20 9"/></g>')
-    b.append(f'<rect x="{x0}" y="{cap_y}" width="{MW-14-x0-22}" height="130" fill="{PAPER2}" stroke="{INK}" stroke-width="2.5"/>')
+    b.append(f'<rect x="{x0}" y="{cap_y}" width="{MW-14-x0-22}" height="160" fill="{PAPER2}" stroke="{INK}" stroke-width="2.5"/>')
     b.append(f'<rect x="{x0}" y="{cap_y}" width="150" height="40" fill="{INK}"/>')
     b.append(T(x0 + 75, cap_y + 27, "SELECTED", "pix", 15, PAPER2, anchor="middle"))
     for k, (slug, name, desc, x, y) in enumerate(items):
